@@ -1,0 +1,24 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+div {
+    max-width: 75%;
+    margin: auto;
+}
+
+.main-container {
+    text-align: center;
+    padding: 1.2em;
+    margin-top: 8em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5em;
+}
+
+button {
+    background-color: rgb(24, 202, 202);
+    border: 0;
+    padding: 0.9em 2em;
+    border-radius: 0.5em;
+    color: white;
+}
