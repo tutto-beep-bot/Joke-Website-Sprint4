@@ -10,6 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let result = document.querySelector('.joke-container');
 let button = document.querySelector('#next-button');
+const reportAcudits = [];
+let currentJoke = '';
+let selectedScore = null;
+getDadJoke();
 function getDadJoke() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -20,13 +24,32 @@ function getDadJoke() {
             });
             const data = yield response.json();
             result.innerHTML = data.joke;
-            return data.joke;
+            currentJoke = data.joke;
+            selectedScore = null;
+            return currentJoke;
         }
         catch (error) {
             result.innerHTML = `An error was produced: ${error}`;
         }
     });
 }
-getDadJoke();
-button.addEventListener('click', getDadJoke);
+const emojiButtons = document.querySelectorAll('.emoji-btn');
+emojiButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        selectedScore = button.id;
+    });
+});
+button.addEventListener('click', () => {
+    if (selectedScore !== null) {
+        const now = new Date().toISOString();
+        reportAcudits.push({
+            joke: `${currentJoke}`,
+            score: `${selectedScore}`,
+            date: `${now}`
+        });
+        console.log(reportAcudits);
+    }
+    ;
+    getDadJoke();
+});
 //# sourceMappingURL=index.js.map

@@ -15,10 +15,18 @@ div {
     border-radius: 0.5em;
 }
 
-button {
+#next-button {
     background-color: rgb(24, 202, 202);
     border: 0;
     padding: 0.9em 2em;
     border-radius: 0.5em;
     color: white;
+    margin-top: 1.3em;
+}
+
+.emoji-btn {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
 }

@@ -1,6 +1,16 @@
 let result = document.querySelector('.joke-container') as HTMLElement
 let button = document.querySelector('#next-button') as HTMLButtonElement
 
+type JokeFormatted = {
+    joke: string;
+    score: string;
+    date: string;
+}
+const reportAcudits: JokeFormatted[] = []
+let currentJoke: string = ''
+let selectedScore: string | null = null;
+
+getDadJoke()
 
 async function getDadJoke() {
     try {
@@ -8,17 +18,40 @@ async function getDadJoke() {
             headers: {
                 'Accept': 'application/json'
             }
-        });
-         
+        }); 
+        
         const data = await response.json();
         result.innerHTML = data.joke
-        return data.joke
+        currentJoke = data.joke
+        selectedScore = null;
+        
+    return currentJoke
         
     } catch (error) {
         result.innerHTML = `An error was produced: ${error}`
     }
 }
 
-getDadJoke()
+const emojiButtons = document.querySelectorAll<HTMLButtonElement>('.emoji-btn');
+        
+emojiButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        selectedScore = button.id;
+        
+    })
+})
 
-button.addEventListener('click', getDadJoke);
+
+
+button.addEventListener('click', () => { 
+    if (selectedScore !== null) {
+        const now = new Date().toISOString();
+        reportAcudits.push({
+            joke: `${currentJoke}`,
+            score: `${selectedScore}`,
+            date: `${now}`
+        });
+        console.log(reportAcudits)
+    };
+    getDadJoke()
+});
