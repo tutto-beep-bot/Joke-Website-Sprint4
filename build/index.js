@@ -13,26 +13,21 @@ let button = document.querySelector('#next-button');
 const reportAcudits = [];
 let currentJoke = '';
 let selectedScore = null;
-getDadJoke();
-function getDadJoke() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch('https://icanhazdadjoke.com/', {
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            const data = yield response.json();
-            result.innerHTML = data.joke;
-            currentJoke = data.joke;
-            selectedScore = null;
-            return currentJoke;
-        }
-        catch (error) {
-            result.innerHTML = `An error was produced: ${error}`;
-        }
-    });
-}
+const getDadJoke = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield fetch('https://icanhazdadjoke.com/', {
+            headers: { 'Accept': 'application/json' }
+        });
+        const data = yield response.json();
+        result.innerHTML = data.joke;
+        currentJoke = data.joke;
+        selectedScore = null;
+        return currentJoke;
+    }
+    catch (error) {
+        result.innerHTML = `An error was produced: ${error}`;
+    }
+});
 const emojiButtons = document.querySelectorAll('.emoji-btn');
 emojiButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -40,8 +35,8 @@ emojiButtons.forEach((button) => {
     });
 });
 button.addEventListener('click', () => {
+    const now = new Date().toISOString();
     if (selectedScore !== null) {
-        const now = new Date().toISOString();
         reportAcudits.push({
             joke: `${currentJoke}`,
             score: `${selectedScore}`,
@@ -49,7 +44,14 @@ button.addEventListener('click', () => {
         });
         console.log(reportAcudits);
     }
-    ;
+    else {
+        reportAcudits.push({
+            joke: `${currentJoke}`,
+            score: `${selectedScore}`,
+            date: `${now}`
+        });
+    }
     getDadJoke();
 });
+getDadJoke();
 //# sourceMappingURL=index.js.map
