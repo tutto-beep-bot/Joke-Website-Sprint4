@@ -11,6 +11,54 @@ const reportAcudits: JokeFormatted[] = []
 let currentJoke: string = ''
 let selectedScore: string | null = null;
 
+const weatherAPIKey: string = '23a5e712a2ed80f4cf34012eb36c0b44'
+
+const getWeatherFromCoordinates = async (lat: number, lon: number) => {
+    try {
+        const weatherLocation = await fetch (`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&exclude={part}&appid=${weatherAPIKey}&units=metric`)
+        const data = await weatherLocation.json()
+        return data
+    } catch (error) {
+        alert(`Error: ${error}`)
+    }
+}
+
+const loadWeather = () => {
+    const weatherDiv = document.getElementById('weather-div')!
+
+    try {
+
+        if(!navigator.geolocation) {
+            weatherDiv.innerText = "Geolocation not supported."
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+    
+        const weather = await getWeatherFromCoordinates(lat, lon);
+    
+        if (weather) {
+            weatherDiv.innerHTML = `
+                ${weather.main.temp.toFixed(0)}°C
+            `;
+        } else {
+            weatherDiv.innerText = 'Could not load weather.';
+        }
+        });
+    } catch (error) {
+        console.error(error)
+        alert('Unable to load weather.')
+    }
+};
+
+
+    loadWeather()
+
+
+
 const getDadJoke = async () => {
     try {
         const response = await fetch('https://icanhazdadjoke.com/', {

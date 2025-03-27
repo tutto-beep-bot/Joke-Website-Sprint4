@@ -30,3 +30,12 @@ div {
     border: none;
     cursor: pointer;
 }
+
+#weather-div {
+    position: absolute;
+    top: 2em;
+    left: 2em;
+    background: #eee;
+    padding: 1em;
+    border-radius:1em;
+}

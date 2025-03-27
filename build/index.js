@@ -13,6 +13,44 @@ let button = document.querySelector('#next-button');
 const reportAcudits = [];
 let currentJoke = '';
 let selectedScore = null;
+const weatherAPIKey = '23a5e712a2ed80f4cf34012eb36c0b44';
+const getWeatherFromCoordinates = (lat, lon) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const weatherLocation = yield fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&exclude={part}&appid=${weatherAPIKey}&units=metric`);
+        const data = yield weatherLocation.json();
+        return data;
+    }
+    catch (error) {
+        alert(`Error: ${error}`);
+    }
+});
+const loadWeather = () => {
+    const weatherDiv = document.getElementById('weather-div');
+    try {
+        if (!navigator.geolocation) {
+            weatherDiv.innerText = "Geolocation not supported.";
+            return;
+        }
+        navigator.geolocation.getCurrentPosition((position) => __awaiter(void 0, void 0, void 0, function* () {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const weather = yield getWeatherFromCoordinates(lat, lon);
+            if (weather) {
+                weatherDiv.innerHTML = `
+                ${weather.main.temp.toFixed(0)}°C
+            `;
+            }
+            else {
+                weatherDiv.innerText = 'Could not load weather.';
+            }
+        }));
+    }
+    catch (error) {
+        console.error(error);
+        alert('Unable to load weather.');
+    }
+};
+loadWeather();
 const getDadJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield fetch('https://icanhazdadjoke.com/', {
