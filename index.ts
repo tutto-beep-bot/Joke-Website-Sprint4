@@ -23,13 +23,14 @@ const getWeatherFromCoordinates = async (lat: number, lon: number) => {
     }
 }
 
-const loadWeather = () => {
-    const weatherDiv = document.getElementById('weather-div')!
+const loadWeather = (): void => {
+    const weatherIcon  = document.getElementById('weather-icon') as HTMLImageElement
+    const temperature = document.getElementById('temperature') as HTMLElement
 
     try {
 
         if(!navigator.geolocation) {
-            weatherDiv.innerText = "Geolocation not supported."
+            weatherIcon.innerText = "Geolocation not supported."
             return;
         }
 
@@ -41,11 +42,9 @@ const loadWeather = () => {
         const weather = await getWeatherFromCoordinates(lat, lon);
     
         if (weather) {
-            weatherDiv.innerHTML = `
-                ${weather.main.temp.toFixed(0)}°C
-            `;
-        } else {
-            weatherDiv.innerText = 'Could not load weather.';
+            weatherIcon.src = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
+            weatherIcon.alt = weather.weather[0].description;
+            temperature.innerText = `${weather.main.temp.toFixed(0)}ºC `
         }
         });
     } catch (error) {
@@ -55,11 +54,11 @@ const loadWeather = () => {
 };
 
 
-    loadWeather()
+loadWeather()
 
 
 
-const getDadJoke = async () => {
+const getDadJoke = async (): Promise<string | undefined> => {
     try {
         const response = await fetch('https://icanhazdadjoke.com/', {
             headers: { 'Accept': 'application/json' }
@@ -67,15 +66,15 @@ const getDadJoke = async () => {
 
         const data = await response.json();
         result.innerHTML = data.joke
-
-        currentJoke = data.joke
-        selectedScore = null;
         
-    return currentJoke
+        currentJoke = data.joke
+        // selectedScore = null;
+        
+        return currentJoke
         
     } catch (error) {
         result.innerHTML = `An error was produced: ${error}`
-    }
+    }  
 };
 
 
@@ -92,7 +91,7 @@ emojiButtons.forEach((button) => {
 
 button.addEventListener('click', () => { 
     const now = new Date().toISOString();
-
+    
     if (selectedScore !== null) {
         reportAcudits.push({
             joke: `${currentJoke}`,
@@ -112,3 +111,10 @@ button.addEventListener('click', () => {
 });
 
 getDadJoke()
+//     weatherDiv.innerHTML = `
+//         <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="${weather.weather[0].description}">
+//         ${weather.main.temp.toFixed(0)}°C
+//     `;
+// } else {
+//     weatherDiv.innerText = 'Could not load weather.';
+// }

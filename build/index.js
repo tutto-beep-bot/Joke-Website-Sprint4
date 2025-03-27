@@ -25,10 +25,11 @@ const getWeatherFromCoordinates = (lat, lon) => __awaiter(void 0, void 0, void 0
     }
 });
 const loadWeather = () => {
-    const weatherDiv = document.getElementById('weather-div');
+    const weatherIcon = document.getElementById('weather-icon');
+    const temperature = document.getElementById('temperature');
     try {
         if (!navigator.geolocation) {
-            weatherDiv.innerText = "Geolocation not supported.";
+            weatherIcon.innerText = "Geolocation not supported.";
             return;
         }
         navigator.geolocation.getCurrentPosition((position) => __awaiter(void 0, void 0, void 0, function* () {
@@ -36,12 +37,9 @@ const loadWeather = () => {
             const lon = position.coords.longitude;
             const weather = yield getWeatherFromCoordinates(lat, lon);
             if (weather) {
-                weatherDiv.innerHTML = `
-                ${weather.main.temp.toFixed(0)}°C
-            `;
-            }
-            else {
-                weatherDiv.innerText = 'Could not load weather.';
+                weatherIcon.src = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
+                weatherIcon.alt = weather.weather[0].description;
+                temperature.innerText = `${weather.main.temp.toFixed(0)}ºC `;
             }
         }));
     }
@@ -59,7 +57,7 @@ const getDadJoke = () => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield response.json();
         result.innerHTML = data.joke;
         currentJoke = data.joke;
-        selectedScore = null;
+        // selectedScore = null;
         return currentJoke;
     }
     catch (error) {
@@ -92,4 +90,11 @@ button.addEventListener('click', () => {
     getDadJoke();
 });
 getDadJoke();
+//     weatherDiv.innerHTML = `
+//         <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="${weather.weather[0].description}">
+//         ${weather.main.temp.toFixed(0)}°C
+//     `;
+// } else {
+//     weatherDiv.innerText = 'Could not load weather.';
+// }
 //# sourceMappingURL=index.js.map
