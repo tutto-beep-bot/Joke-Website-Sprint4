@@ -57,11 +57,35 @@ const getDadJoke = () => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield response.json();
         result.innerHTML = data.joke;
         currentJoke = data.joke;
-        // selectedScore = null;
+        selectedScore = null;
         return currentJoke;
     }
     catch (error) {
         result.innerHTML = `An error was produced: ${error}`;
+    }
+});
+const getChuckNorrisJoke = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield fetch('https://api.chucknorris.io/jokes/random', {
+            headers: { 'Accept': 'application/json' }
+        });
+        const data = yield response.json();
+        result.innerHTML = data.value;
+        currentJoke = data.value;
+        selectedScore = null;
+        return currentJoke;
+    }
+    catch (error) {
+        result.innerHTML = `An error was produced: ${error}`;
+    }
+});
+const getRandomJoke = () => __awaiter(void 0, void 0, void 0, function* () {
+    const random = Math.random();
+    if (random < 0.5) {
+        return yield getDadJoke();
+    }
+    else {
+        return yield getChuckNorrisJoke();
     }
 });
 const emojiButtons = document.querySelectorAll('.emoji-btn');
@@ -87,14 +111,7 @@ button.addEventListener('click', () => {
             date: `${now}`
         });
     }
-    getDadJoke();
+    getRandomJoke();
 });
-getDadJoke();
-//     weatherDiv.innerHTML = `
-//         <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="${weather.weather[0].description}">
-//         ${weather.main.temp.toFixed(0)}°C
-//     `;
-// } else {
-//     weatherDiv.innerText = 'Could not load weather.';
-// }
+getRandomJoke();
 //# sourceMappingURL=index.js.map

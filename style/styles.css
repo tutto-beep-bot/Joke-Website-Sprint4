@@ -19,12 +19,19 @@ div {
 }
 
 #next-button {
-    background-color: rgb(24, 202, 202);
-    border: 0;
+    border-width: 0.1em;
+    border-color: black;
     padding: 0.9em 2em;
-    border-radius: 0.5em;
+    border-radius: 2em;
     color: white;
     margin-top: 1.3em;
+    cursor: pointer;
+    background-color: #dab12d;
+    transition: background-color 0.3s ease;
+}
+
+#next-button:hover {
+    background-color: rgb(160, 118, 4);
 }
 
 .emoji-btn {

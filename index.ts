@@ -57,7 +57,6 @@ const loadWeather = (): void => {
 loadWeather()
 
 
-
 const getDadJoke = async (): Promise<string | undefined> => {
     try {
         const response = await fetch('https://icanhazdadjoke.com/', {
@@ -68,7 +67,7 @@ const getDadJoke = async (): Promise<string | undefined> => {
         result.innerHTML = data.joke
         
         currentJoke = data.joke
-        // selectedScore = null;
+        selectedScore = null;
         
         return currentJoke
         
@@ -76,6 +75,35 @@ const getDadJoke = async (): Promise<string | undefined> => {
         result.innerHTML = `An error was produced: ${error}`
     }  
 };
+
+
+const getChuckNorrisJoke = async (): Promise<string | undefined> => {
+    try {
+        const response = await fetch('https://api.chucknorris.io/jokes/random', {
+            headers: { 'Accept' : 'application/json'}
+        })
+        const data = await response.json();
+        result.innerHTML = data.value
+
+        currentJoke = data.value;
+
+        selectedScore = null;
+
+        return currentJoke
+
+    } catch (error) {
+        result.innerHTML = `An error was produced: ${error}`
+    }
+}
+
+const getRandomJoke = async (): Promise<string | undefined> => {
+    const random = Math.random()
+    if (random < 0.5){
+        return await getDadJoke();
+    } else {
+        return await getChuckNorrisJoke();
+    }
+}
 
 
 const emojiButtons = document.querySelectorAll<HTMLButtonElement>('.emoji-btn');        
@@ -107,14 +135,8 @@ button.addEventListener('click', () => {
         });
     }
     
-    getDadJoke()
+    getRandomJoke()
 });
 
-getDadJoke()
-//     weatherDiv.innerHTML = `
-//         <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" alt="${weather.weather[0].description}">
-//         ${weather.main.temp.toFixed(0)}°C
-//     `;
-// } else {
-//     weatherDiv.innerText = 'Could not load weather.';
-// }
+getRandomJoke()
+
