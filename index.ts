@@ -112,12 +112,18 @@ emojiButtons.forEach((button) => {
     button.addEventListener('click', () => {
         selectedScore = button.id;
         
+        emojiButtons.forEach(btn => btn.classList.remove('active'))
+
+        button.classList.add('active')
     })
+
 })
 
 
 
 button.addEventListener('click', () => { 
+    emojiButtons.forEach(btn => btn.classList.remove('active'));
+
     const now = new Date().toISOString();
     
     if (selectedScore !== null) {

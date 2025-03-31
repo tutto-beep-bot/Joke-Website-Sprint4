@@ -27,7 +27,7 @@ div {
     margin-top: 1.3em;
     cursor: pointer;
     background-color: #dab12d;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
 }
 
 #next-button:hover {
@@ -39,6 +39,19 @@ div {
     background: none;
     border: none;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.emoji-btn:hover {
+    background: #e2e1e1;
+    border-radius: 1em;
+}
+
+.emoji-btn.active {
+    background-color: #ffe066;
+    box-shadow: 0 0 0 0.1em #ffaa00;
+    border-radius: 1em;
+    transform: scale(1.1);
 }
 
 #weather-div {
