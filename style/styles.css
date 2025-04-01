@@ -2,20 +2,23 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-}
-
-div {
-    max-width: 75%;
-    margin: auto;
+    overflow-x: hidden ;
 }
 
 .main-container {
     text-align: center;
-    padding: 1.2em;
-    margin-top: 8em;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 0.5em;
-    max-width: 45%;
+    max-width: 400px;
+    font-size: larger;
+
+}
+
+h2 {
+    color: white;
+}
+
+.joke-container {
+    color: white;
 }
 
 #next-button {
@@ -23,7 +26,6 @@ div {
     border-color: black;
     padding: 0.9em 2em;
     border-radius: 2em;
-    color: white;
     margin-top: 1.3em;
     cursor: pointer;
     background-color: #dab12d;
@@ -58,7 +60,7 @@ div {
     display: flex;
     align-items: center;
     background: none;
-    padding: em 1em;
+    padding: 1em 1em;
     width: fit-content;
     margin-right: 90%;
 }
@@ -66,6 +68,7 @@ div {
 .weather-icon {
     width: 5em;
     height: 5em;
+    margin-left: 2em;
 }
 
 .divider {
@@ -78,4 +81,55 @@ div {
 
 .temperature {
     font-weight: bold;
+}
+
+.blob-container {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDYwMCA2MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAwLDMwMCkiPgogICAgPHBhdGggZD0iTTEyMCwtMTU0LjdDMTU1LjgsLTExMy4zLDE4Ny43LC03Ny41LDE4NS4yLC00NS43QzE4Mi42LC0xMy45LDE0NS42LDEzLjksMTI0LjMsNTQuN0MxMDMuMSw5NS41LDk3LjcsMTQ5LjIsNzEuNSwxNzIuOUM0NS4zLDE5Ni42LC0xLjgsMTkwLjIsLTQwLjMsMTYzLjNDLTc4LjgsMTM2LjUsLTEwOC42LDg5LjIsLTEzMy4yLDM1LjNDLTE1Ny43LC0xOC42LC0xNzYuOSwtNzkuMSwtMTU3LjIsLTEyMi42Qy0xMzcuNSwtMTY2LjIsLTc4LjksLTE5Mi45LC0yNC4xLC0xODYuMkMzMC43LC0xNzkuNSw2MS4zLC0xMzkuOSwxMjAsLTE1NC43WiIgZmlsbD0iIzA4QkRCQSIvPgogIDwvZz4KPC9zdmc+');
+    background-size: contain;
+
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 1200px;
+    min-width: 1200px;
+    padding: 1em 1em;
+    max-width: 90%;
+    margin-top: -15em;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width: 500px) {
+    .blob-container {
+        background-size: contain;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        padding: 2em 1em;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .main-container {
+        max-width: 90%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .wrapper {
+        width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
 }
