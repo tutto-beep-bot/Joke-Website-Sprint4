@@ -138,15 +138,6 @@ h2 {
 }
 
 @media (max-width: 600px) {
-    /* .blob-container {
-        background-size: contain;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        padding: 2em 1em;
-        overflow: hidden;
-        box-sizing: border-box;
-    } */
 
     body {
         background-color: #08BDBA;
@@ -163,12 +154,6 @@ h2 {
         margin-right: 80%;
         margin-left: 15%;
     }
-
-    /* .wrapper {
-        width: 100%;
-        overflow-x: hidden;
-        box-sizing: border-box;
-    } */
 }
 
 @media (max-width: 850px) {
