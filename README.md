@@ -4,7 +4,7 @@
 
 This is a joke website designed with the sole purpose of bringing clients fun and laughter when they start working in the morning. 
 
-There are currently two Random Joke API's working in conjunction to bring in the jokes.
+There are currently two random joke API's working in conjunction to bring in the jokes.
 
 <br>
 
@@ -38,21 +38,24 @@ You can click on "següent acudit" button to load next joke while also saving yo
 
 Contributions are welcome! If you'd like to contribute:
 
-Fork the repository
+- Fork the repository
 
-Create a new branch:
-
-git checkout -b feature-name
-
-Make changes and commit:
-
-git commit -m "Added new feature"
-
-Push to your fork:
-
-git push origin feature-name
-
-Open a Pull Request (PR) on GitHub
+- Create a new branch:
+    ```bash
+    - git checkout -b feature-name
+    ```
+    
+- Make changes and commit:
+    ```bash
+    - git commit -m "Added new feature"
+    ```
+    
+- Push to your fork:
+    ```bash
+    - git push origin feature-name
+    ```
+    
+- Open a Pull Request (PR) on GitHub
 
 
 
